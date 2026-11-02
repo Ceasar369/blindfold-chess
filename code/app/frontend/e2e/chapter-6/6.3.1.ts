@@ -93,7 +93,7 @@ const EXAMPLES: Example[] = [
   },
 ];
 
-const PASS_MARK = "Pass mark for 6.3.1 L1 to L6: my results and my clean games, over my last games at the level. My practice sets it.";
+const PASS_MARK = "Pass mark for 6.3.1 Level 1 to Level 6: my results and my clean games, over my last games at the level. My practice sets it.";
 
 // The note the site gives what I do before a move: a hint's answer, an
 // unclear move's question, or a refusal.

@@ -152,7 +152,7 @@ async function checkScore(page: Page, sent: unknown[], right: number, total: num
   await expect(page.locator(".bigscore")).toHaveAttribute("aria-label", `${right} right answers of ${total}`);
   await expect(page.locator(".kinds li")).toHaveText(kinds.map((k) => `${k}1`));
   for (const [k, v] of counts) await expect(page.locator(".stats div").filter({ has: page.locator("dt", { hasText: new RegExp(`^${k}$`) }) }).locator("dd")).toHaveText(v);
-  await expect(page.locator(".pass p")).toHaveText(passMark);
+  await expect(page.locator(".pass p")).toHaveText(passMark.replace(/\bL(\d+)\b/g, "Level $1"));
   await expect.poll(() => sent.length, { message: "rounds the record kept" }).toBe(1);
   await expect(page.locator(".sendline")).toHaveText("Sent to your progress record.");
   await checkLayout(page);

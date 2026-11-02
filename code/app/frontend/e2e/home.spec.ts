@@ -21,14 +21,14 @@ test("before any round, home offers chapter 1, step 1, and no list of chapters",
   await fakeRecord(page);
   await page.goto("/");
   const first = card(page, "First step");
-  await expect(first.locator(".ls-title")).toHaveText("Find the square L1 — names on the edge");
+  await expect(first.locator(".ls-title")).toHaveText("Find the square Level 1 — names on the edge");
   await expect(first).toContainText("1.1.1 · Chapter 1, Board coordinates · 20 questions · 3 min");
   await expect(first).toContainText("no round yet");
   await expect(first.getByRole("button", { name: /^Next level/ })).toHaveCount(0);
   await expect(page.getByRole("region", { name: "Chapters" })).toHaveCount(0);
   await first.getByRole("button", { name: "Play", exact: true }).click();
   await expect(question(page, 1, 20)).toBeVisible();
-  await expect(page.locator(".sx-lv")).toHaveText("L1");
+  await expect(page.locator(".sx-lv")).toHaveText("Level 1");
   await checkLayout(page);
   expect(errors).toEqual([]);
 });
@@ -41,23 +41,23 @@ test("the step I played last is home's card, through a reload, and its two butto
   await leaveToHome(page);
 
   const last = card(page, "Last played");
-  await expect(last.locator(".ls-title")).toHaveText("Find the square L1 — names on the edge");
-  await expect(last.getByRole("button", { name: "Next level: 1.1.1 L2" })).toBeVisible();
+  await expect(last.locator(".ls-title")).toHaveText("Find the square Level 1 — names on the edge");
+  await expect(last.getByRole("button", { name: "Next level: 1.1.1 Level 2" })).toBeVisible();
   await checkLayout(page);
 
   await page.reload();
-  await expect(last.locator(".ls-title")).toHaveText("Find the square L1 — names on the edge");
+  await expect(last.locator(".ls-title")).toHaveText("Find the square Level 1 — names on the edge");
 
   await last.getByRole("button", { name: "Play again" }).click();
   await expect(question(page, 1)).toBeVisible();
-  await expect(page.locator(".sx-lv")).toHaveText("L1");
+  await expect(page.locator(".sx-lv")).toHaveText("Level 1");
   await leaveToHome(page);
 
-  await last.getByRole("button", { name: "Next level: 1.1.1 L2" }).click();
+  await last.getByRole("button", { name: "Next level: 1.1.1 Level 2" }).click();
   await expect(question(page, 1)).toBeVisible();
-  await expect(page.locator(".sx-lv")).toHaveText("L2");
+  await expect(page.locator(".sx-lv")).toHaveText("Level 2");
   await leaveToHome(page);
-  await expect(last.locator(".ls-title")).toHaveText("Find the square L2 — no names");
+  await expect(last.locator(".ls-title")).toHaveText("Find the square Level 2 — no names");
   await expect(last).toContainText("1.1.1 · Chapter 1, Board coordinates");
 });
 
@@ -74,11 +74,11 @@ test("home's last played follows the level, never a step number", async ({ page 
   });
   await page.goto("/");
   const last = card(page, "Last played");
-  await expect(last.locator(".ls-title")).toHaveText("Name the squares between L2 — nothing lit");
+  await expect(last.locator(".ls-title")).toHaveText("Name the squares between Level 2 — nothing lit");
   await expect(last).toContainText("1.3.1 · Chapter 1, Board coordinates · 20 questions · 8 min");
   await page.evaluate(() => localStorage.setItem("bc.last", JSON.stringify({ chapter: 1, step: 9 })));
   await page.reload();
-  await expect(card(page, "First step").locator(".ls-title")).toHaveText("Find the square L1 — names on the edge");
+  await expect(card(page, "First step").locator(".ls-title")).toHaveText("Find the square Level 1 — names on the edge");
 });
 
 test("after a round, home shows my last score big, against my best", async ({ page }) => {

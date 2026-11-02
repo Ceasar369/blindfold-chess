@@ -124,7 +124,7 @@ type Example = {
 
 const fen = (words: string, turn?: Side) => toFen(turn ? { ...fromWords(words), turn } : fromWords(words));
 const pass = (card: string, levels: string, time = false) =>
-  `Pass mark for ${card} ${levels}: the right answers in one round${time ? ", and my average time per answer" : ""}. My practice sets it.`;
+  `Pass mark for ${card} ${levels.replace(/L(\d+)/g, "Level $1")}: the right answers in one round${time ? ", and my average time per answer" : ""}. My practice sets it.`;
 
 const knight = (level: string, step: number, square: string, shows: Example["shows"], wrong: Wrong["wrong"], told: string, kind: string): Example => ({
   card: "2.1.1",

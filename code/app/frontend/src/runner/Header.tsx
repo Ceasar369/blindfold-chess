@@ -6,6 +6,7 @@
 // buttons read as links. It decides nothing: header.ts says what it shows.
 
 import { useEffect, useRef, useState } from "react";
+import { levelName } from "../level-name.ts";
 import type { Play } from "../rounds/rounds.ts";
 import type { Chip, Header, Mix, Tile } from "./header.ts";
 
@@ -115,7 +116,7 @@ export function StepHeader({ h, onLeave, onRestart, onNext }: Props) {
             type="button"
             className="btn sm primary"
             disabled={!h.next || !h.nextOk}
-            title={h.next ? `${h.next.label} — ${h.next.words}` : "The last step of the chapter"}
+            title={h.next ? `${levelName(h.next.label)} — ${h.next.words}` : "The last step of the chapter"}
             onClick={() => h.next && onNext(h.next.play)}
           >
             Next level ›
@@ -141,11 +142,11 @@ export function StepHeader({ h, onLeave, onRestart, onNext }: Props) {
 
         <div className="sx-name">
           <span className={`sx-t${h.now ? " sx-dsk" : ""}`}>{h.name}</span>
-          <span className="sx-lv">{h.level.replace(/^L(\d+)$/, "Level $1")}</span>
+          <span className="sx-lv">{levelName(h.level)}</span>
           {h.now && (
             <span className="sx-lw keep">
               <span className="sx-dsk">now </span>
-              <b className="sx-now">{h.now.id}</b> · {h.now.asked} of {h.now.of}
+              <b className="sx-now">{levelName(h.now.id)}</b> · {h.now.asked} of {h.now.of}
             </span>
           )}
           {h.label && <span className="sx-lw">{h.label}</span>}

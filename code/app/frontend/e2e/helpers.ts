@@ -87,13 +87,13 @@ export async function openChallenge(page: Page, challenge: string) {
 // Plays a level of the open chapter: its button, under its challenge.
 export async function openLevel(page: Page, challenge: string, level: string) {
   await challengeNode(page, challenge)
-    .locator(".lvbtn", { has: page.locator("b", { hasText: new RegExp(`^${level}$`) }) })
+    .locator(".lvbtn", { has: page.locator("b", { hasText: new RegExp(`^Level ${level.slice(1)}$`) }) })
     .click();
 }
 
 // A level's row, on the chapter page.
 const levelRow = (page: Page, challenge: string, level: string) =>
-  challengeNode(page, challenge).locator(".lvbtn", { has: page.locator("b", { hasText: new RegExp(`^${level}$`) }) });
+  challengeNode(page, challenge).locator(".lvbtn", { has: page.locator("b", { hasText: new RegExp(`^Level ${level.slice(1)}$`) }) });
 
 // A level's last score, in its row's Last cluster: "20/20", or "Not played yet".
 export function lastScore(page: Page, challenge: string, level: string) {
@@ -125,7 +125,7 @@ export async function checkTree(page: Page, n: number) {
       await expect(node.locator(".tag")).toHaveText("Coming");
       continue;
     }
-    await expect(node.locator(".lvbtn b")).toHaveText(c.levels.map((l) => l.id));
+    await expect(node.locator(".lvbtn b")).toHaveText(c.levels.map((l) => `Level ${l.id.slice(1)}`));
     await expect(node.locator(".lvbtn .facts")).toHaveText(c.levels.map((l) => facts(l.questions, l.minutes)));
   }
   const mixed = ch.path.flatMap((s) => (s.kind === "mixed" ? [s] : []));
@@ -152,7 +152,7 @@ export function move(page: Page, n: number) {
 // are estimates, no rule for every screen yet. The question starts above it.
 export const fold = (page: Page) => (page.viewportSize()!.width >= 1100 ? 780 : 740);
 
-// In a mixed round, the level the question on screen comes from: "1.1.1 L3".
+// In a mixed round, the level the question on screen comes from: "1.1.1 Level 3".
 export const nowAt = (page: Page) => page.locator(".sx-now");
 
 // Moves past the told line. A miss shows Continue, and waits for it. A right

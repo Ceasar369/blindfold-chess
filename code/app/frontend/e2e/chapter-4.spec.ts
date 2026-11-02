@@ -83,7 +83,7 @@ async function readShow(page: Page): Promise<{ pieces: Placed[]; from: string }>
 // ---------------------------------------------------------------------------
 // 4.1.1 Name what stands there
 
-const PASS_411 = "Pass mark for 4.1.1 L1 to L5: the right answers in one round, and my average look time. My practice sets it.";
+const PASS_411 = "Pass mark for 4.1.1 Level 1 to Level 5: the right answers in one round, and my average look time. My practice sets it.";
 type Ex411 = { words: string; from: string; squares: Square[]; asked: Square; wrong: string; told: string; kind: string };
 const EX_411: Record<string, Ex411> = {
   L2: {
@@ -305,7 +305,7 @@ for (const id of ["L2", "L3", "L4", "L5"]) {
 // ---------------------------------------------------------------------------
 // 4.2.1 Rebuild the position
 
-const PASS_421 = "Pass mark for 4.2.1 L1 to L6: the positions rebuilt whole and the pieces right in one round, and my average look time. My practice sets it.";
+const PASS_421 = "Pass mark for 4.2.1 Level 1 to Level 6: the positions rebuilt whole and the pieces right in one round, and my average look time. My practice sets it.";
 type Ex421 = { words: string; from: string; wrong: (p: Placed[]) => Placed[]; told: string; kind: string };
 const moved = (from: string, to: string) => (ps: Placed[]) => ps.map((p) => (p.square === from ? { ...p, square: to as Square } : p));
 const EX_421: Record<string, Ex421> = {
@@ -507,8 +507,8 @@ for (const id of ["L1", "L2", "L3", "L4", "L5", "L6"]) {
 // ---------------------------------------------------------------------------
 // 4.3 The nine openings, 4.3.1 to 4.3.9: three levels each, one question a round
 
-const PASS_L1 = (o: Opening) => `Pass mark for ${o.challenge} L1: none. The level ends when the guided reconstruction is right.`;
-const PASS_L23 = (o: Opening) => `Pass mark for ${o.challenge} L2 and L3: the right answer in one round, and my look time at L2. My practice sets it.`;
+const PASS_L1 = (o: Opening) => `Pass mark for ${o.challenge} Level 1: none. The level ends when the guided reconstruction is right.`;
+const PASS_L23 = (o: Opening) => `Pass mark for ${o.challenge} Level 2 and Level 3: the right answer in one round, and my look time at Level 2. My practice sets it.`;
 const targetOf = (o: Opening) => new Map(piecesOf(o.final).map((p) => [p.square as string, p as Placed]));
 
 // A wrong rebuild of one opening at one level, and what it is told.
@@ -877,7 +877,7 @@ test("chapter 4: all 38 levels are reachable, each opening a round of its own ch
   for (const step of path) {
     if (step.kind !== "level") throw new Error("Chapter 4 mixes no round.");
     await openLevel(page, step.challenge, step.level);
-    await expect(page.locator(".sx-lv"), `${step.challenge} ${step.level}`).toHaveText(step.level);
+    await expect(page.locator(".sx-lv"), `${step.challenge} ${step.level}`).toHaveText(`Level ${step.level.slice(1)}`);
     await expect(page.locator(".sx-t"), `${step.challenge} ${step.level}`).toContainText(step.challenge);
     await page.getByRole("button", { name: /Leave/ }).click();
     await expect(page.getByRole("heading", { level: 1, name: "4. Position memory" })).toBeVisible();

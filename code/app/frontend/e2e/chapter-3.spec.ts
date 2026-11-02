@@ -368,7 +368,7 @@ for (const id of ["L1", "L2", "L3", "L4", "L5"]) {
       await next(page);
     }
     expect(seen.example, "the example came back").toBe(true);
-    await scoreShows(page, sent, 9, 10, READ_KIND[id]!, "Pass mark for 3.1.1 L1 to L6: the right answers in one round. My practice sets it.");
+    await scoreShows(page, sent, 9, 10, READ_KIND[id]!, "Pass mark for 3.1.1 Level 1 to Level 6: the right answers in one round. My practice sets it.");
     expect(errors).toEqual([]);
   });
 }
@@ -419,7 +419,7 @@ test(`3.1.1 L6: right sequences, then the Najdorf's 3... cxd4 read from an old p
     await next(page);
   }
   expect(sawExample, "the Najdorf came back").toBe(true);
-  await scoreShows(page, sent, 2, 3, "A move read from an old position", "Pass mark for 3.1.1 L1 to L6: the right answers in one round. My practice sets it.");
+  await scoreShows(page, sent, 2, 3, "A move read from an old position", "Pass mark for 3.1.1 Level 1 to Level 6: the right answers in one round. My practice sets it.");
   await expect(page.locator(".stats")).toContainText("Moves right11");
   await expect(page.locator(".stats")).toContainText("Moves asked12");
   expect(errors).toEqual([]);
@@ -442,7 +442,7 @@ async function writeRound(page: Page, id: string, ex: Example & { kind: string |
     await next(page);
   }
   expect(seen.example, "the example came back").toBe(true);
-  await scoreShows(page, sent, 9, 10, ex.kind, "Pass mark for 3.2.1 L1 to L5: the right answers in one round. My practice sets it.");
+  await scoreShows(page, sent, 9, 10, ex.kind, "Pass mark for 3.2.1 Level 1 to Level 5: the right answers in one round. My practice sets it.");
   expect(errors).toEqual([]);
 }
 
@@ -488,13 +488,13 @@ test("chapter 3's mixed round: 3.1.1 L5 and 3.2.1 L5 in turns, from the path", a
     await expect(questionTile(page, i + 1, 10)).toBeVisible();
     // Turns: my opponent's move comes in, then mine goes out.
     const reading = i % 2 === 0;
-    await expect(nowAt(page)).toHaveText(reading ? "3.1.1 L5" : "3.2.1 L5");
+    await expect(nowAt(page)).toHaveText(reading ? "3.1.1 Level 5" : "3.2.1 Level 5");
     if (reading) await readOne(page, true, null, none);
     else await writeOne(page, "words", null, none);
     if (i < 2) await checkLayout(page);
     await next(page);
   }
   await scoreShows(page, sent, 10, 10, null, "Pass mark for the mixed round: the right answers in one round, and in each challenge's five. My practice sets it.");
-  await expect(page.locator(".kinds li")).toHaveText(["3.1.1 L55 of 5", "3.2.1 L55 of 5"]);
+  await expect(page.locator(".kinds li")).toHaveText(["3.1.1 Level 55 of 5", "3.2.1 Level 55 of 5"]);
   expect(errors).toEqual([]);
 });

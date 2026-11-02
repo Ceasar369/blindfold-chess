@@ -66,10 +66,10 @@ test("Next level plays the challenge's next level, after its last the next chall
   await fakeRecord(page);
   await openChapter(page, 1, "Board coordinates");
   await openLevel(page, "1.1.1", "L2");
-  await expect(page.locator(".sx-lv")).toHaveText("L2");
+  await expect(page.locator(".sx-lv")).toHaveText("Level 2");
   // The path's next step after 1.1.1 L2 is 1.2.1's: the button stays in 1.1.1.
   await page.getByRole("button", { name: /^Next level/ }).click();
-  await expect(page.locator(".sx-lv")).toHaveText("L3");
+  await expect(page.locator(".sx-lv")).toHaveText("Level 3");
   await expect(page.locator(".sx-t")).toHaveText("1.1.1 Find the square");
   await expect(question(page, 1, 20)).toBeVisible();
   await page.getByRole("button", { name: /Leave/ }).click();
@@ -77,7 +77,7 @@ test("Next level plays the challenge's next level, after its last the next chall
   await openLevel(page, "1.1.1", "L3");
   await page.getByRole("button", { name: /^Next level/ }).click();
   await expect(page.locator(".sx-t")).toHaveText(/^1\.1\.2 /);
-  await expect(page.locator(".sx-lv")).toHaveText("L1");
+  await expect(page.locator(".sx-lv")).toHaveText("Level 1");
 });
 
 test("a right answer moves on by itself after 1 second, under an emptying line; a miss waits for Continue", async ({ page }) => {
@@ -192,7 +192,7 @@ test("a mixed round names the level each question comes from, and tallies each c
   await playMixedRound(page);
   await expect(question(page, 1, 23)).toBeVisible();
   await expect(page.locator(".sx-lv")).toHaveText("Mixed");
-  await expect(page.locator(".sx-now")).toHaveText(/^1\.\d\.\d L\d$/);
+  await expect(page.locator(".sx-now")).toHaveText(/^1\.\d\.\d Level \d$/);
   await page.getByRole("button", { name: /^Settings/ }).click();
   // One tally for each challenge, its levels counted together: 4, 4, 7 and 8 pips.
   await expect(page.locator(".sx-mix > div")).toHaveText(["1.1.1", "1.1.2", "1.2.1", "1.3.1"]);

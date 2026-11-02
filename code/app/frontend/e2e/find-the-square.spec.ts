@@ -89,7 +89,7 @@ for (const ex of EXAMPLES) {
     await expect(page.locator(".bigscore")).toHaveAttribute("aria-label", "19 right answers of 20");
     await expect(page.locator(".kinds li")).toHaveText([`${ex.kind}1`]);
     await expect(page.locator(".pass p")).toHaveText(
-      "Pass mark for 1.1.1 L1 to L3: the right answers in one round, and my average time per answer. My practice sets it.",
+      "Pass mark for 1.1.1 Level 1 to Level 3: the right answers in one round, and my average time per answer. My practice sets it.",
     );
     await expect.poll(() => sent.length, { message: "rounds the record kept" }).toBe(1);
     await expect(page.locator(".sendline")).toHaveText("Sent to your progress record.");

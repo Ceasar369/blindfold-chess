@@ -278,7 +278,7 @@ for (const ex of EXAMPLES) {
     await expect(page.locator(".bigscore")).toHaveAttribute("aria-label", `${right} right answers of ${twoRounds ? 1 : 2}`);
     if (ex.kind) await expect(page.locator(".kinds li")).toHaveText([`${ex.kind}1`]);
     await expect(page.locator(".pass p")).toHaveText(
-      "Pass mark for 6.2.1 L1 to L6: the endgames won in one round, and my illegal moves. My practice sets it.",
+      "Pass mark for 6.2.1 Level 1 to Level 6: the endgames won in one round, and my illegal moves. My practice sets it.",
     );
     await expect(page.locator(".stats")).toContainText("Moves played");
     await expect(page.locator(".stats")).toContainText("Fewest moves");

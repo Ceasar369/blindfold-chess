@@ -198,7 +198,7 @@ for (const ex of CASES) {
     await expect(page.getByRole("heading", { level: 1, name: "Score" })).toBeVisible();
     await expect(page.locator(".bigscore")).toHaveAttribute("aria-label", `${level.questions - 1} right answers of ${level.questions}`);
     await expect(page.locator(".kinds li")).toHaveText([`${ex.kind}1`]);
-    await expect(page.locator(".pass p")).toHaveText("Pass mark for 6.1.1 L1 to L5: the right answers in one round. My practice sets it.");
+    await expect(page.locator(".pass p")).toHaveText("Pass mark for 6.1.1 Level 1 to Level 5: the right answers in one round. My practice sets it.");
     await expect.poll(() => sent.length, { message: "rounds the record kept" }).toBe(1);
     await checkLayout(page);
     // A level played from the chapter's tree plays as its step: from step 1, I stand on it.

@@ -100,7 +100,7 @@ test("an open menu is open again after the round, a shut one shut", async ({ pag
   await openChallenge(page, "1.1.1");
   await page.getByRole("button", { name: "Menu", exact: true }).click();
   expect(await menuOpen(page)).toBe(true);
-  await challengeNode(page, "1.1.1").locator(".lvbtn", { has: page.locator("b", { hasText: /^L1$/ }) }).dispatchEvent("click");
+  await challengeNode(page, "1.1.1").locator(".lvbtn", { has: page.locator("b", { hasText: /^Level 1$/ }) }).dispatchEvent("click");
   await expect(question(page, 1, 20)).toBeVisible();
   await expect(strips(page)).toHaveCount(0);
   await page.getByRole("button", { name: /Leave/ }).click();
@@ -155,7 +155,7 @@ test("a later level moves where I stand to its step, the steps between skipped, 
   await openLevel(page, "1.1.1", "L2");
   await playFindTheSquare(page);
   // Next is the chapter's own order, 1.1.1 L3: never the path's step 3, 1.2.1 L1.
-  await expect(page.locator(".nextup")).toContainText("1.1.1 L3");
+  await expect(page.locator(".nextup")).toContainText("1.1.1 Level 3");
   await keptCount(kept, 1);
   expect(kept[0]).toMatchObject({ chapter: 1, step: 1, place: 1 });
   await backToChapter(page);
@@ -194,7 +194,7 @@ test("an earlier level, and the same one, move nothing; the record's rounds show
   // 70%: yellow, with the best average and the fastest round.
   await expect(lastScore(page, "1.1.1", "L2")).toHaveText("9/20");
   await expect(lastScore(page, "1.1.1", "L2").locator(".ls-red")).toHaveText("9");
-  const row = challengeNode(page, "1.1.1").locator(".lvbtn", { has: page.locator("b", { hasText: /^L2$/ }) });
+  const row = challengeNode(page, "1.1.1").locator(".lvbtn", { has: page.locator("b", { hasText: /^Level 2$/ }) });
   await expect(row.locator(".ls-last")).toContainText("4.4 s");
   await expect(row.locator(".ls-last")).toContainText("2:48");
   await expect(bestScore(page, "1.1.1", "L2")).toHaveText("14/20");

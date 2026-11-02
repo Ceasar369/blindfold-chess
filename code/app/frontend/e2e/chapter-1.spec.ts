@@ -84,9 +84,9 @@ type Example = {
   pass: string;
 };
 
-const PASS_112 = "Pass mark for 1.1.2 L1 to L3: the right answers in one round, and my average time per answer. My practice sets it.";
-const PASS_121 = "Pass mark for 1.2.1 L1 and L2: the right answers in one round, and my average time per answer. My practice sets it.";
-const PASS_131 = "Pass mark for 1.3.1 L1 to L3: the right answers in one round. My practice sets it.";
+const PASS_112 = "Pass mark for 1.1.2 Level 1 to Level 3: the right answers in one round, and my average time per answer. My practice sets it.";
+const PASS_121 = "Pass mark for 1.2.1 Level 1 and Level 2: the right answers in one round, and my average time per answer. My practice sets it.";
+const PASS_131 = "Pass mark for 1.3.1 Level 1 to Level 3: the right answers in one round. My practice sets it.";
 
 const name112 = (level: string, step: number, square: string, given: string | RegExp, told: string | RegExp, kind: string): Example => ({
   card: "1.1.2",

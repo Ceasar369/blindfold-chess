@@ -8,6 +8,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { shapesOf } from "../board/arrows.ts";
 import { Glyph } from "../board/Board.tsx";
 import type { Square } from "../core.ts";
+import { levelName } from "../level-name.ts";
 import { BOOK, PICS, runsOf, type Pic, type Rule } from "../library/library.ts";
 import { LOCAL_RECORD, flush, levelKey, statsKey, useRecordStatus, type Last, type Stats, type StepStats } from "../record/record.ts";
 import {
@@ -59,8 +60,8 @@ function verdict(s: StepStats): { text: string; good: boolean } {
   return gap > 0 ? { text: `${gap} below your best.`, good: false } : { text: "You matched your best score.", good: true };
 }
 
-// "1.1.1 L3 — Find the square, 2 seconds", as a step's words.
-const nextWords = (next: Next) => `${next.label} — ${next.words}`.replace(/\.$/, "");
+// "1.1.1 Level 3 — Find the square, 2 seconds", as a step's words.
+const nextWords = (next: Next) => `${levelName(next.label)} — ${next.words}`.replace(/\.$/, "");
 
 // ---------------------------------------------------------------------------
 // Home: one card, the step I played last. From the winner level-stats g2 v1,
@@ -90,7 +91,7 @@ export function HomeScreen({ last, stats, onPlay }: { last: Last | null; stats: 
         <p className="ls-title">
           {ch && here.kind === "level" ? (
             <>
-              {ch.name} <span className="ls-lv">{here.level.replace(/^L(\d+)$/, "Level $1")}</span>
+              {ch.name} <span className="ls-lv">{levelName(here.level)}</span>
               {label ? ` — ${label}` : ""}
             </>
           ) : (
@@ -149,7 +150,7 @@ export function HomeScreen({ last, stats, onPlay }: { last: Last | null; stats: 
           </button>
           {next && (
             <button type="button" className="btn" disabled={!next.ok} onClick={() => onPlay(next.play)}>
-              Next level: {next.label}
+              Next level: {levelName(next.label)}
               {next.ok ? "" : " (coming)"}
             </button>
           )}
@@ -262,7 +263,7 @@ export function ChapterScreen({
                       >
                         <span className="ls-who">
                           <span>
-                            <b>{l.id}</b>
+                            <b>{levelName(l.id)}</b>
                             {label ? ` — ${label}` : ""}
                           </span>
                           {facts(l.questions, l.minutes)}
@@ -300,11 +301,11 @@ const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one :
 // The score
 
 // A mixed round's shares, one row per challenge. A challenge with one part keeps
-// its level in its label: "2.1.1 L5".
+// its level in its label: "2.1.1 Level 5".
 function sharesOf(sheet: Sheet): { label: string; right: number; total: number }[] {
   const rows = new Map<string, { label: string; right: number; total: number; parts: number }>();
   for (const s of sheet.shares) {
-    const row = rows.get(s.challenge) ?? { label: `${s.challenge} ${s.level}`, right: 0, total: 0, parts: 0 };
+    const row = rows.get(s.challenge) ?? { label: `${s.challenge} ${levelName(s.level)}`, right: 0, total: 0, parts: 0 };
     rows.set(s.challenge, { label: row.label, right: row.right + s.right, total: row.total + s.total, parts: row.parts + 1 });
   }
   return [...rows].map(([challenge, r]) => ({ label: r.parts > 1 ? challenge : r.label, right: r.right, total: r.total }));
@@ -338,7 +339,7 @@ export function ScoreScreen({
       <section className="panel score">
         <p className="muted">
           {round.title}
-          {single ? ` · ${single.level.id}` : ""}
+          {single ? ` · ${levelName(single.level.id)}` : ""}
         </p>
         <p className="bigscore" aria-label={`${sheet.right} right answers of ${sheet.total}`}>
           <span className="big">{sheet.right}</span>
@@ -405,11 +406,11 @@ export function ScoreScreen({
 
         <h2>Pass mark</h2>
         {
-          // Stand-in. The pass mark is the page's own stand-in, word for word.
+          // Stand-in. The pass mark keeps its wording, with full level names.
         }
         <div className="pass">
           <Tag>Stand-in</Tag>
-          <p>{round.passMark}</p>
+          <p>{levelName(round.passMark)}</p>
         </div>
 
         <SendLine />
