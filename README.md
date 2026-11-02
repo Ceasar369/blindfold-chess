@@ -1,7 +1,7 @@
 # Blindfold Chess
 
-I built this trainer to play chess without seeing pieces.
-It turns that goal into short, focused exercises.
+I made this to practise blindfold chess.
+It has short exercises for playing without seeing the pieces.
 
 **[Play in your browser](https://ceasar369.github.io/blindfold-chess/)**
 · [Download the source](https://github.com/Ceasar369/blindfold-chess/archive/refs/heads/main.zip)
@@ -19,10 +19,10 @@ It turns that goal into short, focused exercises.
 
 **Why I made it**
 
-I wanted an app shaped around my own practice.
-I defined the exercises, interface, and feedback I wanted.
-I used my [Claude behavior layer](https://github.com/Ceasar369/claude-behavior-layer) while building it.
-This project shows the resulting app and its source.
+I wanted a trainer for my own practice.
+I tried my [Claude setup](https://github.com/Ceasar369/claude-behavior-layer) on this separate project.
+It worked well for me here too.
+I’ve shared the game in case someone else enjoys it.
 
 **Run it locally**
 
