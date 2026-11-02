@@ -90,7 +90,7 @@ export function HomeScreen({ last, stats, onPlay }: { last: Last | null; stats: 
         <p className="ls-title">
           {ch && here.kind === "level" ? (
             <>
-              {ch.name} <span className="ls-lv">{here.level}</span>
+              {ch.name} <span className="ls-lv">{here.level.replace(/^L(\d+)$/, "Level $1")}</span>
               {label ? ` — ${label}` : ""}
             </>
           ) : (

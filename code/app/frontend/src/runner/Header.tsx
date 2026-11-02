@@ -141,7 +141,7 @@ export function StepHeader({ h, onLeave, onRestart, onNext }: Props) {
 
         <div className="sx-name">
           <span className={`sx-t${h.now ? " sx-dsk" : ""}`}>{h.name}</span>
-          <span className="sx-lv">{h.level}</span>
+          <span className="sx-lv">{h.level.replace(/^L(\d+)$/, "Level $1")}</span>
           {h.now && (
             <span className="sx-lw keep">
               <span className="sx-dsk">now </span>
