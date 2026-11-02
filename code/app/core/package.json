@@ -1,0 +1,21 @@
+{
+  "name": "blindfold-chess-core",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "check": "tsc --noEmit",
+    "download": "node --experimental-strip-types scripts/download.ts",
+    "packs": "node --experimental-strip-types scripts/make-packs.ts"
+  },
+  "dependencies": {
+    "chess.js": "1.4.0",
+    "js-chess-engine": "2.4.6"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.4",
+    "fast-check": "4.10.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

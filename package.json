@@ -1,0 +1,14 @@
+{
+  "name": "blindfold-chess",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "24.x" },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "start": "node scripts/local.mjs",
+    "build": "npm run build --prefix code/app/frontend",
+    "build:pages": "node scripts/build-pages.mjs",
+    "check": "npm run check --prefix code/app/core && npm run check --prefix code/app/backend && npm run check --prefix code/app/frontend",
+    "test": "npm test --prefix code/app/core && npm test --prefix code/app/backend && npm test --prefix code/app/frontend"
+  }
+}

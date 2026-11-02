@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "lib": ["es2023", "dom", "dom.iterable"],
+    "types": ["node", "vite/client"],
+    "paths": { "@core/*": ["../core/src/*"] }
+  },
+  "include": ["src", "e2e", "vite.config.ts", "playwright.config.ts"]
+}

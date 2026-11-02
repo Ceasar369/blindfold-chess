@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.data/
+.env
+.env.*
+!.env.example
+.wrangler/
+test-results/
+playwright-report/
+code/app/core/scripts/.downloads/
+.DS_Store
